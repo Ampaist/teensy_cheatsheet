@@ -1,0 +1,97 @@
+##############################################################
+Cheat sheet for TeensyPewPew
+##############################################################
+
+
+##############################################################
+LEDS
+##############################################################
+
+LED0 // left light
+	DDRB bit loc 2 --Data direction register = 1 input - 0 output
+	PORTB bit loc 2  -- 1 on - 0 off
+
+LED1 // Right light 
+	DDRB bit loc 3
+	PORTB bit loc 3
+
+LED3 // ?? test this
+	DDRD bit loc 6
+	PORTD bit loc 6
+
+##############################################################
+Buttons
+##############################################################
+
+
+Button1 // left button / SW2
+	DDRF bit loc 6 -- Data direction register = 0 output - 1 input
+	PINF bit loc 6 -- Reads value
+
+Button2 // right button / SW3
+	DDRF bit loc 5 -- Data direction register = 0 output - 1 input
+	PINF bit loc 5 -- Reads value
+
+##############################################################
+D-pad
+##############################################################
+
+UP // d-pad up / SW1
+	DDRD bit loc 1 -- Data direction register = 0 output - 1 input
+	PIND bit loc 1 -- Reads Value
+
+DOWN // d-pad down / SW1
+	DDRB bit loc 7 -- Data direction register = 0 output - 1 input
+	PINB bit loc 7 -- Reads Value
+
+LEFT // d-pad left / SW1
+	DDRB bit loc 1 -- Data direction register = 0 output - 1 input
+	PINB bit loc 1 -- Reads Value
+
+RIGHT // d-pad right / SW1
+	DDRD bit loc 0 -- Data direction register = 0 output - 1 input
+	PIND bit loc 0 -- Reads Value
+
+CENTRE // d-pad Centre / SW1
+	DDRB bit loc 0 -- Data direction register = 0 output - 1 input
+	PINB bit loc 0 -- Reads Value	
+
+##############################################################
+LCD SCREEN
+##############################################################
+
+LCD Backlights
+	DDRC bit loc 7 -- Data register needs to be 1
+	PORTC bit loc 7 --  setting the the value to 1 turns on
+
+LCD Serial Clock
+	DDRF bit loc 7 -- Data register toggle 0 to 1 during transfer to signal
+	PORTF bit loc 7
+
+LCD Serial Data input -- sends data to LCD one bit at a time
+	DDRB bit loc 6 -- Data register - interprets as pixel == 1 || command == 0
+	PORTB bit loc 6 -- Sends data/command
+
+LCD Serial Data/Command pin aka DC
+	DDRB bit loc 5 -- Data register - 0 command, 1 pixel data
+	PORTB bit loc 5 -- sends data comamands
+
+LCD Reset
+	DDRB bit loc 4 -- Data register resets to default config on 0m resume with 1
+	PORTB bit loc 4 -- sends data?
+
+LCD chip Select
+	DDRD bit loc 7 -- Data register LCD incoming data 0 is active
+	PORTD bit loc 7 -- sends data?
+
+lcd_init(LCD_DEFAULT_CONTRAST);
+
+LCD_CMD( lcd_set_function, lcd_instr_extended );
+
+LCD_CMD( lcd_set_function, lcd_instr_basic );
+
+LCD_CMD( lcd_set_function, lcd_instr_basic | lcd_addr_horizontal);
+
+LCD_DATA(some data/pixels) -- Loads data buffer or data if less then 8x8
+
+
